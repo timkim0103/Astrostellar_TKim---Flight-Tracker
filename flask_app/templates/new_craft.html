@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class = "text-light">Add a New Song</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class = "bg-dark text-light">
+    <a href="/crafts" class="btn btn-warning">Back to Tracker List Table</a>
+    <a href="/logout" class="btn btn-danger">Logout</a>
+    <form action="/crafts/create" method="post" class="col-5 mx-auto">
+        <input type="hidden" name="postedby_id" value="{{session['user_id']}}">
+        
+        <h2 class="text-center">Add a New Space and Air Craft</h2>
+        
+        {% with messages = get_flashed_messages(category_filter=['deal']) %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Wait a minute!!!  Please fill the form out again!</strong>
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+
+
+        <div class="form-group">
+            <label for="code">Flight Number:</label>
+            <input type="text" name="code" class="form-control">
+            
+        </div>
+        <!--
+        <div class="form-group">
+            <label for="crafttype">Astrostellar Plane:</label>
+            <input type="text" name="crafttype"  class="form-control">
+        </div>
+        -->
+
+        
+
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea name="description"  cols="45" rows="15" class="form-control"></textarea>
+        </div>
+        <div>
+            <p>If you wish, you can include the model year.</p>
+        </div>
+
+        <!-- This is the space traveling variant of the Boeing 717.  It is based on the 717-200 lengthwise and on the 717-100X for all else.
+
+This captures and rescues Lt. Matt Kowalski from the gravity film before commencing the landing course. -->
+
+        
+
+        <div class="form-group">
+        <label for="progress">What is the flight progress? </label>
+        <select name="progress"  class="form-control">
+            <option value="-">-</option>
+            <option value="Ready to Board">Ready to Board</option>
+            <option value="Boarding">Boarding</option>
+            <option value="Last Call">Last Call</option>
+            <option value="Gate Closed">Gate Closed</option>
+            <option value="Departed from Gate">Departed from Gate</option>
+            <option value="Lift Off">Lift Off &#128640</option>
+            <option value="Stars">Stars &#10024 &#11088 &#127775 &#10035 &#10036 </option>
+            <option value="Galaxies">Galaxies &#127756</option>
+            <option value="The Sun">The Sun &#9728</option>
+            <option value="Solar System Tour">Solar System Tour &#127759 &#129680 </option>
+            <option value="Trip to the Moon">Trip to the Moon &#127765 </option>
+            <option value="Flying from the Moon Back to Earth">Flying from the Moon Back to Earth &#127769 --> &#127758</option>
+            <option value="Dramatic Return to Earth">Dramatic Return to Earth &#127758</option>
+            <option value="Cruising">Cruising &#9992</option>
+            <option value="Final Descent">Final Descent &#9992</option>
+            <option value="Landing (or Landed)">Landing (or Landed) &#128748</option>
+            <option value="Arrived at Usual Gate">Arrived at Usual Gate </option>
+            <option value="Arrived at Different Gate">Arrived at Different Gate </option>
+            <option value="Arrived at a gate at Different Airport">Arrived at a gate at Different Airport </option>
+        </select>
+        </div>    
+
+        <div class="form-group">
+        <label for="status">Choose a Status:</label>
+        <select name="status"  class="form-control">
+            <option value="-">-</option>
+            <option value="Early">Early</option>
+            <option value="On Time">On Time</option>
+            <option value="Delayed">Delayed</option>
+            <option value="Significantly Delayed">Significantly Delayed</option>
+            <option value="Delayed so much that the lunar month is over">Delayed so much that the lunar month is over</option>
+            <option value="Not operating at all this month">Not operating at all this month</option>
+            <option value="Cancelled">Cancelled</option>
+        </select>        
+        </div>
+        
+        <input type="submit" value="Add" class="btn btn-success">
+        
+    </form>
+</body>
+</html>

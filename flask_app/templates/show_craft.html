@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Craft and Flight Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="bg-dark text-light">
+    <a href="/crafts" class="btn btn-warning">Back to Tracker List Table</a>
+    <a href="/logout" class="btn btn-danger">Logout</a>
+    <h2 class="text-left">{{deal.crafttype}}</h2>
+    
+    
+    <p>Flight Number: {{deal.code}}</p>
+    <p>Craft Model: {% if deal.id==1%}
+        Boeing 717 Astrostellar
+        {% endif %}
+        {% if deal.id==2%}
+        Boeing 737 Astrostellar
+        {% endif %}
+        {% if deal.id==3%}
+        Boeing The Rescuer of Tuffy Bear and Ursula Minor
+        {% endif %}
+    </p>
+
+    <p>Description: {{deal.description}}</p>
+    <p>Progress: {{deal.progress}}
+        {% if deal.progress=="Lift Off"%}
+                    &#128640
+                    {% endif %}
+                    {% if deal.progress=="Stars"%}
+                    &#10024 &#11088 &#127775 &#10035 &#10036
+                    {% endif %}
+                    {% if deal.progress=="Galaxies"%}
+                    &#127756
+                    {% endif %}
+                    {% if deal.progress=="The Sun"%}
+                    &#9728
+                    {% endif %}
+                    {% if deal.progress=="Solar System Tour"%}
+                    &#127759 &#129680
+                    {% endif %}
+                    {% if deal.progress=="Trip to the Moon"%}
+                    &#127765
+                    {% endif %}
+                    {% if deal.progress=="Flying from the Moon Back to Earth"%}
+                    &#127769 &#10145 &#127758
+                    {% endif %}
+                    {% if deal.progress=="Dramatic Return to Earth"%}
+                    &#127758
+                    {% endif %}
+                    {% if deal.progress=="Cruising" or deal.progress=="Final Descent"%}
+                    &#9992
+                    {% endif %}
+                    {% if deal.progress=="Landing (or Landed)"%}
+                    &#128748
+                    {% endif %}
+                    {% if deal.progress=="Arrived at Usual Gate" or deal.progress=="Arrived at Different Gate"%}
+                    <span>☑️✅</span>
+                    {% endif %}
+    </p>
+    <p>Status: {{deal.status}}</p>
+    <!-- Nested query value goes just above -->
+    
+    
+
+    
+
+</body>
+</html>

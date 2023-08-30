@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class = "bg-dark">
+    <h1 class="text-center text-light">Welcome to the Astrostellar Flight Tracker, {{user.firstname}}!!</h1>
+    
+    {% if session.user_id == 1 %}
+    <a href="/crafts/new" class="btn btn-primary">+Create</a>
+    {% endif %}
+    <a href="/logout" class="btn btn-info">Logout</a>
+	<h3 class = "text-center text-light">The Astrostellar planes are planes that start as space crafts to do <br> a full out space tour that ends at the trip to the moon.  After <br> the trip to the moon, they fly back to Earth and return to Earth dramatically <br> (including reentry and subsequent fall glide).  The dramatic return to Earth ends as the plane turns into a <br> normal jet airplane to fly as such to cruise at 41000 feet before making the final descent and landing.</h3>
+    <h3 class = "text-center text-light">All of the Astrostellars are space traveling variants of Boeing 7x7 Aircrafts and are made by Boeing!</h3>
+    <h2 class="text-center text-primary">Departure Point for all Astrostellar flights: Pacific Spaceport Complex - Alaska (PSCA)</h2>
+    
+    <h2 class="text-center text-primary">Arrival Point for all Astrostellar flights: Chicago O'Hare International Airport (ORD)</h2>
+
+
+    <h3 class = "text-info">SERVICE ALERT</h3>
+    <h3 class = "text-success">All Astrostellar flights are resuming for May 2023.  For the first time ever, the Boeing The Rescuer of Tuffy Bear and Ursula Minor has debuted!</h3>
+    <p class = "text-light">Starting in 2023, The Rescuer of Tuffy Bear and Ursula Minor may be operated instead of the 717 Astrostellar and 737 Astrostellar on certain months, depending on the situation.</p>
+
+
+    <table class="table table-hover text-light">
+        <thead>
+            <tr>
+                <th>Flight Number/Code</th>
+                <th>Astrostellar Craft</th>
+                
+                <th>Progress</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for craft in crafts %}
+            <tr>
+                <td>{{ craft.code }}</td>
+                <td>{% if craft.id==1%}
+                    Boeing 717 Astrostellar
+                    {% endif %}
+                    {% if craft.id==2%}
+                    Boeing 737 Astrostellar
+                    {% endif %}
+                    {% if craft.id==3%}
+                    Boeing The Rescuer of Tuffy Bear and Ursula Minor
+                    {% endif %}</td>
+                <td>{{ craft.progress }}  
+                    {% if craft.progress=="Lift Off"%}
+                    &#128640
+                    {% endif %}
+                    {% if craft.progress=="Stars"%}
+                    &#10024 &#11088 &#127775 &#10035 &#10036
+                    {% endif %}
+                    {% if craft.progress=="Galaxies"%}
+                    &#127756
+                    {% endif %}
+                    {% if craft.progress=="The Sun"%}
+                    &#9728
+                    {% endif %}
+                    {% if craft.progress=="Solar System Tour"%}
+                    &#127759 &#129680
+                    {% endif %}
+                    {% if craft.progress=="Trip to the Moon"%}
+                    &#127765
+                    {% endif %}
+                    {% if craft.progress=="Flying from the Moon Back to Earth"%}
+                    &#127769 &#10145 &#127758
+                    {% endif %}
+                    {% if craft.progress=="Dramatic Return to Earth"%}
+                    &#127758
+                    {% endif %}
+                    {% if craft.progress=="Cruising" or craft.progress=="Final Descent"%}
+                    &#9992
+                    {% endif %}
+                    {% if craft.progress=="Landing (or Landed)"%}
+                    &#128748
+                    {% endif %}
+                    {% if craft.progress=="Arrived at Usual Gate" or craft.progress=="Arrived at Different Gate"%}
+                    ☑️✅
+                    {% endif %}
+
+                </td>
+                <td>{{craft.status}}</td>
+                
+                
+                <td>
+                    
+                    <a href="/crafts/show/{{ craft.id }}">View</a> 
+                    
+                    
+                    {% if craft.postedby_id == session.user_id %}
+                    |<a href="/crafts/edit/{{ craft.id }}">Edit</a> |
+                    <a href="/crafts/destroy/{{ craft.id }}">Delete</a>
+                    {% endif %}
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
